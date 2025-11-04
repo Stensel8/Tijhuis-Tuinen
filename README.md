@@ -14,7 +14,7 @@ This is a business website for Tijhuis Tuinen, built and maintained for showcasi
 - Bootstrap Icons
 
 ## Installation
-1. Clone the repo: `git clone https://github.com/[USERNAME]/Tijhuis-Tuinen.git`
+1. Clone the repo: `git clone https://github.com/Stensel8/Tijhuis-Tuinen.git`
 2. Open `index.html` in your browser or deploy via GitHub Pages.
 
 ## License
