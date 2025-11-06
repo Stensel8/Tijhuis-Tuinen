@@ -128,19 +128,27 @@
    * Animation on scroll function and init
    */
   function aosInit() {
-    // Calculate responsive offset based on screen size
-    // Larger screens need more offset to trigger animations earlier
-    const screenWidth = window.innerWidth;
-    let offset = 120; // Default offset for mobile
+    // Responsive offset configuration for different screen sizes
+    const OFFSET_CONFIG = {
+      LARGE_MONITOR: { minWidth: 1920, offset: 200 },  // 27" and above
+      MEDIUM_MONITOR: { minWidth: 1440, offset: 180 }, // Medium monitors
+      LAPTOP: { minWidth: 1024, offset: 150 },          // Small monitors/laptops
+      TABLET: { minWidth: 768, offset: 130 },           // Tablets
+      DEFAULT: 120                                       // Mobile and fallback
+    };
     
-    if (screenWidth >= 1920) {
-      offset = 200; // Large monitors (27" and above)
-    } else if (screenWidth >= 1440) {
-      offset = 180; // Medium monitors
-    } else if (screenWidth >= 1024) {
-      offset = 150; // Small monitors/laptops
-    } else if (screenWidth >= 768) {
-      offset = 130; // Tablets
+    // Calculate offset based on screen width
+    const screenWidth = window.innerWidth;
+    let offset = OFFSET_CONFIG.DEFAULT;
+    
+    if (screenWidth >= OFFSET_CONFIG.LARGE_MONITOR.minWidth) {
+      offset = OFFSET_CONFIG.LARGE_MONITOR.offset;
+    } else if (screenWidth >= OFFSET_CONFIG.MEDIUM_MONITOR.minWidth) {
+      offset = OFFSET_CONFIG.MEDIUM_MONITOR.offset;
+    } else if (screenWidth >= OFFSET_CONFIG.LAPTOP.minWidth) {
+      offset = OFFSET_CONFIG.LAPTOP.offset;
+    } else if (screenWidth >= OFFSET_CONFIG.TABLET.minWidth) {
+      offset = OFFSET_CONFIG.TABLET.offset;
     }
     
     AOS.init({
@@ -149,9 +157,7 @@
       once: false,
       mirror: false,
       offset: offset, // Responsive offset for earlier animation triggers
-      anchorPlacement: 'top-bottom', // Start animation when element top hits bottom of viewport
-      delay: 0, // No delay, animations start immediately when triggered
-      disable: false
+      anchorPlacement: 'top-bottom' // Start animation when element top hits bottom of viewport
     });
   }
   window.addEventListener('load', aosInit);
