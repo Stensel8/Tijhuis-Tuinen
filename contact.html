@@ -145,21 +145,26 @@
               <img src="assets/img/contact/contact.avif" alt="Contact decoratie" class="img-fluid w-100 rounded shadow">
             </div>
             
-            <form action="https://api.web3forms.com/submit" method="POST" class="php-email-form" id="contact-form" data-aos="fade-up" data-aos-delay="200">
-              <input type="hidden" name="access_key" value="e5c045b9-820c-4a97-b279-2004603ab0c3">
-              <input type="hidden" name="subject" value="Nieuw contactformulier bericht van Tijhuis-Tuinen.nl">
-              <input type="hidden" name="from_name" value="Tijhuis Tuinen Website">
+            <form action="https://api.web3forms.com/submit" method="POST" id="contact-form" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+              <input type="hidden" name="access_key" value="">
+              <input type="hidden" name="subject" value="Nieuw contactformulier bericht van Tijhuis Tuinen">
+              <input type="hidden" name="from_name" value="Tijhuis Tuinen">
+              <input type="checkbox" name="botcheck" id="" style="display: none;">
               <div class="row gy-4">
 
                 <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Uw Naam" required="" autocomplete="name">
+                  <input type="text" name="First Name" class="form-control" placeholder="Uw Naam" required="" autocomplete="name">
                 </div>
 
                 <div class="col-md-6 ">
                   <input type="email" class="form-control" name="email" placeholder="Uw Email" required="" autocomplete="email">
                 </div>
 
-                <div class="col-12">
+                <div class="col-md-6">
+                  <input type="text" class="form-control" name="Phone Number" placeholder="Uw Telefoonnummer" required="">
+                </div>
+
+                <div class="col-md-6">
                   <input type="text" class="form-control" name="subject" placeholder="Onderwerp" required="">
                 </div>
 
@@ -168,11 +173,13 @@
                 </div>
 
                 <div class="col-12 text-center">
-                  <div class="loading">Verzenden...</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Uw bericht is verzonden. Bedankt!</div>
-
                   <button type="submit">Verstuur Bericht</button>
+                </div>
+
+                <div class="col-12">
+                  <div class="loading" style="display: none;"><i class="bi bi-arrow-repeat"></i> Verzenden...</div>
+                  <div class="error-message text-danger" style="display: none;"></div>
+                                    <div class="sent-message" style="display: none; color: #000;">Uw bericht is succesvol verzonden. Dank u!</div>
                 </div>
 
               </div>
@@ -248,7 +255,6 @@
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
   
@@ -260,8 +266,48 @@
   <script src="assets/js/main.js"></script>
 
   <script>
-    // Anti-spam: Track time on page
-    window.pageLoadTime = Date.now();
+    // Simple form submission to Web3Forms
+    const form = document.getElementById('contact-form');
+    const loading = form.querySelector('.loading');
+    const errorMessage = form.querySelector('.error-message');
+    const sentMessage = form.querySelector('.sent-message');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      loading.style.display = 'block';
+      errorMessage.style.display = 'none';
+      sentMessage.style.display = 'none';
+
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: formData
+        });
+
+        loading.style.display = 'none';
+
+        if (response.ok) {
+          const result = await response.json();
+          if (result.success) {
+            sentMessage.style.display = 'block';
+            form.reset();
+          } else {
+            errorMessage.textContent = result.message || 'Fout opgetreden.';
+            errorMessage.style.display = 'block';
+          }
+        } else {
+          errorMessage.textContent = 'Fout opgetreden.';
+          errorMessage.style.display = 'block';
+        }
+      } catch (error) {
+        loading.style.display = 'none';
+        errorMessage.textContent = 'Netwerkfout.';
+        errorMessage.style.display = 'block';
+      }
+    });
   </script>
 </body>
 
