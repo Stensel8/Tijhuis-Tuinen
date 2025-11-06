@@ -23,6 +23,17 @@
     };
   }
 
+  const queueAOSRefresh = debounce(() => {
+    if (window.AOS && typeof AOS.refreshHard === 'function') {
+      AOS.refreshHard();
+    }
+  }, 150);
+
+  function getHeaderOffset() {
+    const header = document.querySelector('#header');
+    return header ? header.offsetHeight : 0;
+  }
+
   /**
    * Apply .scrolled class to the body as the page is scrolled down
    */
@@ -33,7 +44,7 @@
     window.scrollY > 100 ? selectBody.classList.add('scrolled') : selectBody.classList.remove('scrolled');
   }
 
-  document.addEventListener('scroll', toggleScrolled);
+  window.addEventListener('scroll', toggleScrolled, { passive: true });
   window.addEventListener('load', toggleScrolled);
 
   /**
@@ -52,6 +63,10 @@
    * Hide mobile nav on same-page/hash links
    */
   document.querySelectorAll('#navmenu a').forEach(navmenu => {
+    navmenu.classList.add('nav-link');
+    if (navmenu.hash) {
+      navmenu.setAttribute('data-bs-target', navmenu.hash);
+    }
     navmenu.addEventListener('click', () => {
       if (document.querySelector('.mobile-nav-active')) {
         mobileNavToogle();
@@ -95,48 +110,39 @@
   
   scrollTop.addEventListener('click', (e) => {
     e.preventDefault();
-    
-    // Smooth scroll to top with easing animation
-    const duration = 800; // Duration in milliseconds
-    const start = window.scrollY;
-    const startTime = performance.now();
-    
-    // Easing function for natural animation
-    const easeInOutCubic = (t) => {
-      return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
-    };
-    
-    const animateScroll = (currentTime) => {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const easing = easeInOutCubic(progress);
-      
-      window.scrollTo(0, start * (1 - easing));
-      
-      if (progress < 1) {
-        requestAnimationFrame(animateScroll);
-      }
-    };
-    
-    requestAnimationFrame(animateScroll);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
   window.addEventListener('load', toggleScrollTop);
-  document.addEventListener('scroll', toggleScrollTop);
+  window.addEventListener('scroll', toggleScrollTop, { passive: true });
 
   /**
    * Animation on scroll function and init
    */
-  function aosInit() {
-    AOS.init({
-      duration: 800,
-      easing: 'ease-in-out',
-      once: false,
-      mirror: false,
-      offset: window.innerWidth > 1200 ? 120 : 50
-    });
+  let currentAOSOffset = null;
+
+  function initAOS() {
+    if (typeof AOS === 'undefined') return;
+
+    const computedOffset = Math.min(80, Math.max(24, Math.round(window.innerHeight * 0.08)));
+
+    if (currentAOSOffset !== computedOffset) {
+      currentAOSOffset = computedOffset;
+      AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: false,
+        mirror: false,
+        offset: computedOffset
+      });
+    }
+
+    queueAOSRefresh();
   }
-  window.addEventListener('load', aosInit);
+
+  document.addEventListener('DOMContentLoaded', initAOS);
+  window.addEventListener('load', initAOS);
+  window.addEventListener('resize', debounce(initAOS, 200));
 
   /**
    * Initiate glightbox
@@ -148,69 +154,92 @@
   /**
    * Init isotope layout and filters
    */
-  document.querySelectorAll('.isotope-layout').forEach(function(isotopeItem) {
-    let layout = isotopeItem.getAttribute('data-layout') ?? 'masonry';
-    let filter = isotopeItem.getAttribute('data-default-filter') ?? '*';
-    let sort = isotopeItem.getAttribute('data-sort') ?? 'original-order';
+  document.querySelectorAll('.isotope-layout').forEach((isotopeItem) => {
+    const layout = isotopeItem.getAttribute('data-layout') ?? 'masonry';
+    const defaultFilter = isotopeItem.getAttribute('data-default-filter') ?? '*';
+    const sort = isotopeItem.getAttribute('data-sort') ?? 'original-order';
+    const isotopeContainer = isotopeItem.querySelector('.isotope-container');
+    const filterButtons = Array.from(isotopeItem.querySelectorAll('.isotope-filters li'));
 
-    // Check for hash-based filter (all categories)
-    if (window.location.hash === '#boomverzorging') {
-      filter = '.filter-boomverzorging';
-    } else if (window.location.hash === '#omheining') {
-      filter = '.filter-omheining';
-    } else if (window.location.hash === '#ontwerp') {
-      filter = '.filter-ontwerp';
-    } else if (window.location.hash === '#onderhoud-gazon') {
-      filter = '.filter-onderhoud-gazon';
-    } else if (window.location.hash === '#voortuin') {
-      filter = '.filter-voortuin';
-    } else if (window.location.hash === '#overkapping') {
-      filter = '.filter-overkapping';
-    } else if (window.location.hash === '#tuinaanleg') {
-      filter = '.filter-tuinaanleg';
+    if (!isotopeContainer || typeof Isotope === 'undefined') {
+      return;
     }
 
-    let initIsotope;
-    imagesLoaded(isotopeItem.querySelector('.isotope-container'), function() {
-      initIsotope = new Isotope(isotopeItem.querySelector('.isotope-container'), {
-        itemSelector: '.isotope-item',
-        layoutMode: layout,
-        filter: filter,
-        sortBy: sort
+    const isoInstance = new Isotope(isotopeContainer, {
+      itemSelector: '.isotope-item',
+      layoutMode: layout,
+      filter: defaultFilter,
+      sortBy: sort
+    });
+
+    const requestLayout = () => requestAnimationFrame(() => isoInstance.layout());
+
+    const setActiveButton = (button) => {
+      const active = isotopeItem.querySelector('.isotope-filters .filter-active');
+      if (active === button) return;
+      if (active) active.classList.remove('filter-active');
+      if (button) button.classList.add('filter-active');
+    };
+
+    const arrangeWithFilter = (filterValue) => {
+      isoInstance.arrange({ filter: filterValue || '*' });
+    };
+
+    const activateButton = (button) => {
+      if (!button) return;
+      const filterValue = button.getAttribute('data-filter') || '*';
+      setActiveButton(button);
+      arrangeWithFilter(filterValue);
+      requestLayout();
+    };
+
+    filterButtons.forEach((button) => {
+      button.addEventListener('click', (event) => {
+        event.preventDefault();
+        if (button.classList.contains('filter-active')) return;
+        activateButton(button);
       });
     });
 
-    isotopeItem.querySelectorAll('.isotope-filters li').forEach(function(filters) {
-      filters.addEventListener('click', function() {
-        isotopeItem.querySelector('.isotope-filters .filter-active').classList.remove('filter-active');
-        this.classList.add('filter-active');
-        initIsotope.arrange({
-          filter: this.getAttribute('data-filter')
-        });
-        if (typeof aosInit === 'function') {
-          aosInit();
-        }
-      }, false);
-    });
-
-    // Set active filter based on hash (all categories)
-    const hashToFilter = {
-      '#boomverzorging': '.filter-boomverzorging',
-      '#omheining': '.filter-omheining',
-      '#ontwerp': '.filter-ontwerp',
-      '#onderhoud-gazon': '.filter-onderhoud-gazon',
-      '#voortuin': '.filter-voortuin',
-      '#overkapping': '.filter-overkapping',
-      '#tuinaanleg': '.filter-tuinaanleg'
+    const applyHashFilter = () => {
+      const hash = window.location.hash;
+      if (!hash || hash.length < 2) return false;
+      const normalized = hash.substring(1);
+      const button = isotopeItem.querySelector(`.isotope-filters li[data-filter=".filter-${normalized}"]`);
+      if (button) {
+        activateButton(button);
+        return true;
+      }
+      return false;
     };
-    if (hashToFilter[window.location.hash]) {
-      const activeFilter = isotopeItem.querySelector('.isotope-filters li[data-filter="' + hashToFilter[window.location.hash] + '"]');
-      if (activeFilter) {
-        isotopeItem.querySelector('.isotope-filters .filter-active').classList.remove('filter-active');
-        activeFilter.classList.add('filter-active');
+
+    if (!applyHashFilter()) {
+      const initialActive = isotopeItem.querySelector('.isotope-filters .filter-active');
+      if (initialActive) {
+        arrangeWithFilter(initialActive.getAttribute('data-filter'));
+      } else {
+        const defaultButton = isotopeItem.querySelector(`.isotope-filters li[data-filter="${defaultFilter}"]`);
+        if (defaultButton) {
+          activateButton(defaultButton);
+        } else {
+          arrangeWithFilter(defaultFilter);
+        }
       }
     }
 
+    window.addEventListener('hashchange', applyHashFilter);
+
+    if (typeof imagesLoaded === 'function') {
+      imagesLoaded(isotopeContainer).on('progress', requestLayout).on('always', () => queueAOSRefresh());
+    }
+
+    isoInstance.on('arrangeComplete', () => {
+      queueAOSRefresh();
+    });
+
+    window.addEventListener('load', requestLayout);
+    requestLayout();
+    queueAOSRefresh();
   });
 
   /**
@@ -287,85 +316,63 @@
   });
 
   /**
-   * Navmenu Scrollspy
+   * Bootstrap ScrollSpy for nav menu
    */
-  let navmenulinks = document.querySelectorAll('.navmenu a');
+  let scrollSpyInstance = null;
 
-  function navmenuScrollspy() {
-    navmenulinks.forEach(navmenulink => {
-      if (!navmenulink.hash) return;
-      let section = document.querySelector(navmenulink.hash);
-      if (!section) return;
-      let position = window.scrollY + 200;
-      if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
-        document.querySelectorAll('.navmenu a.active').forEach(link => link.classList.remove('active'));
-        navmenulink.classList.add('active');
-      } else {
-        navmenulink.classList.remove('active');
-      }
-    })
-  }
-  window.addEventListener('load', navmenuScrollspy);
-  document.addEventListener('scroll', navmenuScrollspy);
+  const initScrollSpy = () => {
+    if (typeof bootstrap === 'undefined' || !bootstrap.ScrollSpy) return;
+    if (scrollSpyInstance) {
+      scrollSpyInstance.dispose();
+    }
+    scrollSpyInstance = new bootstrap.ScrollSpy(document.body, {
+      target: '#navmenu',
+      offset: getHeaderOffset() + 16
+    });
+  };
+
+  window.addEventListener('load', initScrollSpy);
+  window.addEventListener('resize', debounce(initScrollSpy, 200));
+  window.addEventListener('hashchange', () => {
+    if (scrollSpyInstance) {
+      scrollSpyInstance.refresh();
+    }
+  });
 
   /**
-   * Custom Lazy Loading for Images
+   * Native image priority hints for portfolio
    */
-  function initLazyLoading() {
-    const lazyImages = document.querySelectorAll('img[loading="lazy"]');
-    
-    // Move src to data-src and set placeholder
-    lazyImages.forEach(img => {
-      if (!img.dataset.src) {
-        img.dataset.src = img.src;
-        img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'; // 1x1 transparent placeholder
-        img.classList.add('lazy');
+  function prioritizePortfolioImages() {
+    const portfolioImages = document.querySelectorAll('.portfolio .portfolio-item img');
+    if (!portfolioImages.length) return;
+
+    const supportsNativeLazy = 'loading' in HTMLImageElement.prototype;
+
+    portfolioImages.forEach((img, index) => {
+      img.decoding = 'async';
+
+      if (!img.hasAttribute('sizes')) {
+        img.setAttribute('sizes', '(min-width: 992px) 33vw, (min-width: 768px) 50vw, 100vw');
+      }
+
+      if (supportsNativeLazy) {
+        if (index < 6) {
+          img.loading = 'eager';
+          img.setAttribute('fetchpriority', 'high');
+        } else {
+          img.loading = 'lazy';
+          img.setAttribute('fetchpriority', 'low');
+        }
       }
     });
 
-    // Intersection Observer for lazy loading
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const img = entry.target;
-          img.src = img.dataset.src;
-          img.classList.remove('lazy');
-          observer.unobserve(img);
-        }
-      });
-    }, {
-      rootMargin: '50px 0px', // Start loading 50px before entering viewport
-      threshold: 0.01
-    });
-
-    lazyImages.forEach(img => {
-      imageObserver.observe(img);
-    });
-
-    // Load images that are already in viewport on load
-    const loadVisibleImages = () => {
-      lazyImages.forEach(img => {
-        if (img.classList.contains('lazy')) {
-          const rect = img.getBoundingClientRect();
-          if (rect.top < window.innerHeight + 50 && rect.bottom > -50) {
-            img.src = img.dataset.src;
-            img.classList.remove('lazy');
-            imageObserver.unobserve(img);
-          }
-        }
-      });
-    };
-
-    window.addEventListener('load', loadVisibleImages);
-    window.addEventListener('scroll', loadVisibleImages);
-    window.addEventListener('resize', loadVisibleImages);
+    queueAOSRefresh();
   }
 
-  // Initialize lazy loading after DOM is ready
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initLazyLoading);
+    document.addEventListener('DOMContentLoaded', prioritizePortfolioImages);
   } else {
-    initLazyLoading();
+    prioritizePortfolioImages();
   }
 
 })();

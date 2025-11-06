@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Ontwerp - Tijhuis Tuinen</title>
-  <meta name="description" content="Tuinontwerp op maat - Tijhuis Tuinen ontwerpt uw droomtuin die past bij uw levensstijl">
-  <meta name="keywords" content="tuinontwerp, tuinarchitect, tuinplan, Hengelo, Twente">
+  <title>403 - Verboden | Tijhuis Tuinen</title>
+  <meta name="description" content="De toegang tot deze pagina is geblokkeerd. Tijhuis Tuinen - Ontwerp / Aanleg / Onderhoud / Bestratingen">
+  <meta name="keywords" content="hovenier, tuinen, tuinontwerp, tuinaanleg, tuinonderhoud, bestratingen, Hengelo, Twente, 403">
 
   <!-- Favicons -->
   <link rel="icon" type="image/png" href="assets/img/favicon/favicon-96x96.png" sizes="96x96" />
@@ -29,10 +29,10 @@
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
+  <link href="assets/css/main.css?v=2" rel="stylesheet">
 </head>
 
-<body class="services-details-page ontwerp-page">
+<body class="error-page">
 
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
@@ -48,7 +48,7 @@
           <li><a href="index.html#about">Over Ons</a></li>
           <li class="dropdown"><a href="index.html#services"><span>Diensten</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="ontwerp.html" class="active ontwerp-link">Ontwerp</a></li>
+              <li><a href="ontwerp.html" class="ontwerp-link">Ontwerp</a></li>
               <li><a href="aanleg.html" class="aanleg-link">Aanleg</a></li>
               <li><a href="onderhoud.html" class="onderhoud-link">Onderhoud</a></li>
             </ul>
@@ -63,100 +63,21 @@
     </div>
   </header>
 
-  <main class="main">
+  <main class="main" style="padding-top: 80px;">
 
-    <!-- Page Title -->
-    <div class="page-title" data-aos="fade">
-      <div class="heading">
-        <div class="container">
-          <div class="row d-flex justify-content-center text-center">
-            <div class="col-lg-8">
-              <h1>Ontwerp</h1>
-              <p class="mb-0">Een tuin die past bij uw levensstijl</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <nav class="breadcrumbs">
-        <div class="container">
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li class="current">Ontwerp</li>
-          </ol>
-        </div>
-      </nav>
-    </div><!-- End Page Title -->
-
-    <!-- Service Details Section -->
-    <section id="service-details" class="service-details section">
+    <!-- Error Section -->
+    <section id="error" class="error section">
       <div class="container">
-        <div class="row gy-5">
-
-          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-
-            <div class="service-box">
-              <h4>Onze Diensten</h4>
-              <div class="services-list">
-                <a href="ontwerp.html" class="active"><i class="bi bi-arrow-right-circle"></i><span>Ontwerp</span></a>
-                <a href="aanleg.html"><i class="bi bi-arrow-right-circle"></i><span>Aanleg</span></a>
-                <a href="onderhoud.html"><i class="bi bi-arrow-right-circle"></i><span>Onderhoud</span></a>
-                <a href="index.html#services"><i class="bi bi-arrow-right-circle"></i><span>Boomverzorging</span></a>
-                <a href="index.html#services"><i class="bi bi-arrow-right-circle"></i><span>Bestrating & Drainage</span></a>
-              </div>
-            </div><!-- End Services List -->
-
-            <div class="help-box d-flex flex-column justify-content-center align-items-center">
-              <i class="bi bi-envelope help-icon"></i>
-              <h4>Contact</h4>
-              <p class="d-flex align-items-center mt-2 mb-0">
-                <a href="mailto:info@tijhuis-tuinen.nl" class="d-flex align-items-center">
-                  <i class="bi bi-envelope me-2"></i>
-                  <span>info@tijhuis-tuinen.nl</span>
-                </a>
-              </p>
-              <p class="d-flex align-items-center mt-2 mb-0">
-                <a href="contact.html" class="d-flex align-items-center">
-                  <i class="bi bi-chat-dots me-2"></i>
-                  <span>Contact formulier</span>
-                </a>
-              </p>
-            </div>
-
+        <div class="row justify-content-center">
+          <div class="col-lg-6 text-center">
+            <h2>De toegang tot deze pagina is geblokkeerd.</h2>
+            <p>U beschikt niet over de vereiste rechten om deze inhoud te bekijken. Neem contact op voor ondersteuning.</p>
+            <p id="countdown">U wordt automatisch doorgestuurd naar de homepagina over 10 seconden.</p>
+            <a href="contact.html" class="btn btn-primary mt-3">Neem contact op</a>
           </div>
-
-          <div class="col-lg-8 ps-lg-5" data-aos="fade-up" data-aos-delay="200">
-            <img src="assets/img/logo/ontwerp-knop.avif" alt="Tuinontwerp" class="img-fluid services-img">
-            <h3>ONTWERP</h3>
-            <p>
-              Zoals uit onze lijfspreuk <strong></strong>"Groener Leven.."</strong> blijkt vinden wij bij Tijhuis Tuinen dat uw tuin moet passen bij uw manier van leven. Vandaar dat wij samen met u tot een plan willen komen waarin wij uw wensen en onze kennis & ervaring samenbrengen tot een duurzaam tuinontwerp.
-            </p>
-            <ul>
-              <li><i class="bi bi-check-circle"></i> <span>Duurzaam</span></li>
-              <li><i class="bi bi-check-circle"></i> <span>Ambachtelijk</span></li>
-              <li><i class="bi bi-check-circle"></i> <span>Samen met u</span></li>
-              <li><i class="bi bi-check-circle"></i> <span>Kennis & ervaring</span></li>
-              <li><i class="bi bi-check-circle"></i> <span>Balans</span></li>
-              <li><i class="bi bi-check-circle"></i> <span>Lijnenspel</span></li>
-              <li><i class="bi bi-check-circle"></i> <span>Binnen en buitenleven</span></li>
-            </ul>
-            <p>
-              Wij ontwerpen ambachtelijk en schetsen en tekenen dus op de tekentafel met de hand. Hiermee laten we onze creativiteit niet door een onpersoonlijk en/of vooraf geprogrammeerd systeem beïnvloeden.
-            </p>
-            <p>
-              <strong>Tuinontwerp is kunst… Geen kunstje!</strong>
-            </p>
-            <p>
-              Een duurzaam tuinontwerp afgestemd op uw woning, bedrijfspand, kantoor of interieur is een basis. De basis voor de binding van het binnen- en buitenleven. Ervaren van de verschillende seizoenen en het groene leven schept rust, ruimte en geborgenheid.
-            </p>
-            <p>
-              <em>Uw manier van leven… "Groener leven…"</em>
-            </p>
-          </div>
-
         </div>
       </div>
-    </section><!-- /Service Details Section -->
-
+    </section>
   </main>
 
   <footer id="footer" class="footer position-relative light-background">
@@ -199,7 +120,7 @@
 
         <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
           <h4>Contact</h4>
-          <p><strong>Email:</strong> <a href="mailto:info@tijhuis-tuinen.nl">info@tijhuis-tuinen.nl</a></p>
+          <p><strong>Email:</strong> <script type="text/javascript">document.write('<a href="mailto:info@tijhuis-tuinen.nl">info@tijhuis-tuinen.nl<\/a>');</script><noscript>Schakel JavaScript in of gebruik het contactformulier</noscript></p>
           <p><strong>Telefoon:</strong> <a href="tel:0742670050">074 2670050</a></p>
         </div>
 
@@ -223,13 +144,26 @@
   <script src="assets/vendor/php-email-form/validate.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  
   <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <!-- Auto redirect script with countdown -->
+  <script>
+    const countdownElement = document.getElementById('countdown');
+    let seconds = 10;
+    const interval = setInterval(function() {
+      countdownElement.textContent = 'U wordt automatisch doorgestuurd naar de homepagina over ' + seconds + ' seconden.';
+      seconds--;
+      if (seconds < 0) {
+        clearInterval(interval);
+        window.location.href = 'index.html';
+      }
+    }, 1000);
+  </script>
 
 </body>
 

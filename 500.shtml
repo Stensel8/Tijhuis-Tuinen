@@ -4,9 +4,9 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>404 - Pagina niet gevonden | Tijhuis Tuinen</title>
-  <meta name="description" content="De pagina die u zoekt bestaat niet. Tijhuis Tuinen - Ontwerp / Aanleg / Onderhoud / Bestratingen">
-  <meta name="keywords" content="hovenier, tuinen, tuinontwerp, tuinaanleg, tuinonderhoud, bestratingen, Hengelo, Twente, 404">
+  <title>500 - Interne serverfout | Tijhuis Tuinen</title>
+  <meta name="description" content="Er ging iets mis bij het verwerken van uw verzoek. Tijhuis Tuinen - Ontwerp / Aanleg / Onderhoud / Bestratingen">
+  <meta name="keywords" content="hovenier, tuinen, tuinontwerp, tuinaanleg, tuinonderhoud, bestratingen, Hengelo, Twente, 500">
 
   <!-- Favicons -->
   <link rel="icon" type="image/png" href="assets/img/favicon/favicon-96x96.png" sizes="96x96" />
@@ -63,26 +63,17 @@
     </div>
   </header>
 
-  <main class="main">
-
-    <!-- Page Title -->
-    <div class="page-title" data-aos="fade">
-    </div><!-- End Page Title -->
+  <main class="main" style="padding-top: 80px;">
 
     <!-- Error Section -->
-    <section id="error" class="error section decorative-section">
-
-      <!-- Background decorations -->
-      <div class="bg-decoration-1"></div>
-      <div class="bg-decoration-2"></div>
-
-      <!-- Grass pattern decoration -->
-      <img src="assets/img/decorative/grass-pattern.svg" alt="" class="grass-pattern-decoration">      <div class="container decorative-content">
+    <section id="error" class="error section">
+      <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-6 text-center">
-            <h2>De pagina die u zoekt bestaat niet of is verplaatst.</h2>
+            <h2>Er is een interne serverfout opgetreden.</h2>
+            <p>Probeer het later opnieuw of neem direct contact op.</p>
             <p id="countdown">U wordt automatisch doorgestuurd naar de homepagina over 10 seconden.</p>
-            <a href="index.html" class="btn btn-primary mt-3">Ga naar Home</a>
+            <a href="contact.html" class="btn btn-primary mt-3">Neem contact op</a>
           </div>
         </div>
       </div>
@@ -162,9 +153,9 @@
 
   <!-- Auto redirect script with countdown -->
   <script>
-    var countdownElement = document.getElementById('countdown');
-    var seconds = 10;
-    var interval = setInterval(function() {
+    const countdownElement = document.getElementById('countdown');
+    let seconds = 10;
+    const interval = setInterval(function() {
       countdownElement.textContent = 'U wordt automatisch doorgestuurd naar de homepagina over ' + seconds + ' seconden.';
       seconds--;
       if (seconds < 0) {
