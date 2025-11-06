@@ -80,6 +80,52 @@
       order: 3;
     }
   }
+
+  // Mobile-specific logo adjustments to prevent overlap with contact button
+  @media (max-width: 768px) {
+    .logo {
+      .logo-icon {
+        max-height: 38px;
+        margin-right: 8px;
+      }
+
+      img {
+        max-height: 28px;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+
+      span {
+        font-size: 20px;
+      }
+    }
+
+    .btn-getstarted {
+      font-size: 13px;
+      padding: 6px 16px;
+    }
+  }
+
+  // Extra small mobile devices
+  @media (max-width: 480px) {
+    .logo {
+      .logo-icon {
+        max-height: 32px;
+        margin-right: 6px;
+      }
+
+      img {
+        max-height: 24px;
+      }
+    }
+
+    .btn-getstarted {
+      font-size: 12px;
+      padding: 5px 14px;
+    }
+  }
 }
 
 .scrolled .header {

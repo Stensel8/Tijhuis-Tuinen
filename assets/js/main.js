@@ -128,14 +128,36 @@
    * Animation on scroll function and init
    */
   function aosInit() {
+    // Calculate responsive offset based on screen size
+    // Larger screens need more offset to trigger animations earlier
+    const screenWidth = window.innerWidth;
+    let offset = 120; // Default offset for mobile
+    
+    if (screenWidth >= 1920) {
+      offset = 200; // Large monitors (27" and above)
+    } else if (screenWidth >= 1440) {
+      offset = 180; // Medium monitors
+    } else if (screenWidth >= 1024) {
+      offset = 150; // Small monitors/laptops
+    } else if (screenWidth >= 768) {
+      offset = 130; // Tablets
+    }
+    
     AOS.init({
-      duration: 600,
+      duration: 800, // Increased from 600 for smoother animations
       easing: 'ease-in-out',
       once: false,
-      mirror: false
+      mirror: false,
+      offset: offset, // Responsive offset for earlier animation triggers
+      anchorPlacement: 'top-bottom', // Start animation when element top hits bottom of viewport
+      delay: 0, // No delay, animations start immediately when triggered
+      disable: false
     });
   }
   window.addEventListener('load', aosInit);
+  
+  // Re-initialize AOS on window resize to adjust offset for screen size changes
+  window.addEventListener('resize', debounce(aosInit, 250));
 
   /**
    * Initiate glightbox
