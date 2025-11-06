@@ -1,15 +1,13 @@
 # Tijhuis-Tuinen
 
-**Status:** Work in Progress (WIP)
+**Status:** Considered ready
 
-A responsive Bootstrap-based website for Tijhuis Tuinen, featuring modern UI with Swiper sliders and Bootstrap Icons.
+The Bootstrap-based website for Tijhuis Tuinen, featuring modern UI with Swiper sliders and Bootstrap Icons. This repository serves as the "testing" environment for the actual Tijhuis-Tuinen website.
 
-## About
-This is a business website for Tijhuis Tuinen, built and maintained for showcasing garden services.
 
-## Tech Stack
+## Technology Stack
 - HTML5 / CSS3 / JavaScript
-- Bootstrap
+- Bootstrap 5
 - Swiper.js
 - Bootstrap Icons
 
