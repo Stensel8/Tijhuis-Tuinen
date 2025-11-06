@@ -3230,3 +3230,10 @@ section,
 .glightbox-clean .gslide-desc {
   color: var(--contrast-color);
 }
+
+/* Lazy loading styles */
+.lazy {
+  min-height: 200px;
+  background-color: #f5f5f5;
+  display: block;
+}

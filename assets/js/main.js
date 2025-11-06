@@ -308,4 +308,64 @@
   window.addEventListener('load', navmenuScrollspy);
   document.addEventListener('scroll', navmenuScrollspy);
 
+  /**
+   * Custom Lazy Loading for Images
+   */
+  function initLazyLoading() {
+    const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+    
+    // Move src to data-src and set placeholder
+    lazyImages.forEach(img => {
+      if (!img.dataset.src) {
+        img.dataset.src = img.src;
+        img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'; // 1x1 transparent placeholder
+        img.classList.add('lazy');
+      }
+    });
+
+    // Intersection Observer for lazy loading
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.dataset.src;
+          img.classList.remove('lazy');
+          observer.unobserve(img);
+        }
+      });
+    }, {
+      rootMargin: '50px 0px', // Start loading 50px before entering viewport
+      threshold: 0.01
+    });
+
+    lazyImages.forEach(img => {
+      imageObserver.observe(img);
+    });
+
+    // Load images that are already in viewport on load
+    const loadVisibleImages = () => {
+      lazyImages.forEach(img => {
+        if (img.classList.contains('lazy')) {
+          const rect = img.getBoundingClientRect();
+          if (rect.top < window.innerHeight + 50 && rect.bottom > -50) {
+            img.src = img.dataset.src;
+            img.classList.remove('lazy');
+            imageObserver.unobserve(img);
+          }
+        }
+      });
+    };
+
+    window.addEventListener('load', loadVisibleImages);
+    window.addEventListener('scroll', loadVisibleImages);
+    window.addEventListener('resize', loadVisibleImages);
+  }
+
+  // Initialize lazy loading after DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLazyLoading);
+  } else {
+    initLazyLoading();
+  }
+
 })();
