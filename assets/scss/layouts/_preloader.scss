@@ -1,0 +1,59 @@
+// main: ../main.scss
+/*--------------------------------------------------------------
+# Preloader
+--------------------------------------------------------------*/
+#preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  overflow: hidden;
+  background: var(--background-color);
+  transition: all 0.6s ease-out;
+
+  // NIEUWE 3-KLEURIGE VERSIE MET 3 LANGE DRAAIENDE BARS
+  &:before {
+    content: "";
+    position: fixed;
+    top: calc(50% - 30px);
+    left: calc(50% - 30px);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: conic-gradient(
+      transparent 0deg 12.5deg,
+      var(--brand-grey) 12.5deg 47.5deg,
+      transparent 47.5deg 132.5deg,
+      var(--brand-green) 132.5deg 167.5deg,
+      transparent 167.5deg 252.5deg,
+      var(--brand-brown) 252.5deg 287.5deg,
+      transparent 287.5deg 360deg
+    );
+    animation: animate-preloader 1.5s linear infinite;
+    mask: radial-gradient(circle at center, transparent 24px, black 24px, black 30px, transparent 30px);
+    -webkit-mask: radial-gradient(circle at center, transparent 24px, black 24px, black 30px, transparent 30px);
+  }
+
+  // OUDE GROENE VERSIE (uitgecommentarieerd)
+  // &:before {
+  //   content: "";
+  //   position: fixed;
+  //   top: calc(50% - 30px);
+  //   left: calc(50% - 30px);
+  //   border: 6px solid #ffffff;
+  //   border-color: var(--accent-color) transparent var(--accent-color) transparent;
+  //   border-radius: 50%;
+  //   width: 60px;
+  //   height: 60px;
+  //   animation: animate-preloader 1.5s linear infinite;
+  // }
+}
+
+@keyframes animate-preloader {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

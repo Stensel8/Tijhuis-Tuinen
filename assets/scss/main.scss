@@ -1,0 +1,39 @@
+// out: ../css/main.css
+// You can use the "Easy Compile" VS Code extension to easily compile the scss files https://marketplace.visualstudio.com/items?itemName=refgd.easy-compile
+
+@import './_variables.scss';
+
+@import './layouts/_general.scss';
+@import './layouts/_header.scss';
+@import './layouts/_navmenu.scss';
+@import './layouts/_footer.scss';
+@import './layouts/_preloader.scss';
+@import './layouts/_scrolltop.scss';
+@import './layouts/_aos.scss';
+@import './layouts/_page-titles.scss';
+@import './_sections.scss';
+@import './_widgets.scss';
+
+/* GLightbox Custom Styling */
+.glightbox-clean .gslide-description {
+  background: var(--brand-green);
+}
+
+.glightbox-clean .gslide-title {
+  color: var(--contrast-color);
+}
+
+.glightbox-clean .gslide-desc {
+  color: var(--contrast-color);
+}
+
+/* Page-specific color overrides */
+.aanleg-page {
+  --accent-color: var(--brand-brown);
+  --nav-hover-color: #6b7c3e; /* Keep navbar hover green */
+}
+
+.onderhoud-page {
+  --accent-color: var(--brand-green);
+  --nav-hover-color: var(--brand-green);
+}
