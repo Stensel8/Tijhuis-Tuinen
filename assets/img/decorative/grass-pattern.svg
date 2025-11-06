@@ -1,9 +1,0 @@
-<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-  <!-- Organic grass blades -->
-  <path d="M15,85 Q14,60 18,35 Q20,25 16,10" stroke="#6b7c3e" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.7"/>
-  <path d="M28,85 Q27,55 31,30 Q33,18 29,5" stroke="#8bc34a" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.65"/>
-  <path d="M42,85 Q41,58 45,32 Q47,20 43,8" stroke="#4caf50" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.7"/>
-  <path d="M56,85 Q55,62 59,36 Q61,24 57,12" stroke="#6b7c3e" stroke-width="2.8" fill="none" stroke-linecap="round" opacity="0.6"/>
-  <path d="M70,85 Q69,56 73,28 Q75,16 71,6" stroke="#8bc34a" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.65"/>
-  <path d="M84,85 Q83,60 87,34 Q89,22 85,10" stroke="#6b7c3e" stroke-width="2.3" fill="none" stroke-linecap="round" opacity="0.7"/>
-</svg>
