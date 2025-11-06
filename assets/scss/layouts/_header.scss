@@ -80,6 +80,19 @@
       order: 3;
     }
   }
+
+  @media (max-width: 768px) {
+    .logo {
+      .logo-icon {
+        max-height: 38px;
+        margin-left: 4px;
+      }
+
+      .sitename {
+        max-height: 45px;
+      }
+    }
+  }
 }
 
 .scrolled .header {

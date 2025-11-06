@@ -129,10 +129,11 @@
    */
   function aosInit() {
     AOS.init({
-      duration: 600,
+      duration: 800,
       easing: 'ease-in-out',
       once: false,
-      mirror: false
+      mirror: false,
+      offset: window.innerWidth > 1200 ? 120 : 50
     });
   }
   window.addEventListener('load', aosInit);
