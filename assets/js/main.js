@@ -1,7 +1,7 @@
 /**
 * Website: Tijhuis Tuinen
 * Based on: Append Bootstrap Template (https://bootstrapmade.com/append-bootstrap-website-template/)
-* Updated: Nov 27 2025 with Bootstrap v5.3.8, Swiper v12.0.3
+* Updated: Nov 30 2025 with Bootstrap v5.3.8, Swiper v12.0.3
 * Custom website for Tijhuis Tuinen landscaping company
 */
 

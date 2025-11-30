@@ -9,12 +9,12 @@
   <meta name="keywords" content="hovenier, tuinen, tuinontwerp, tuinaanleg, tuinonderhoud, bestratingen, Hengelo, Twente, 401">
 
   <!-- Favicons -->
-  <link rel="icon" type="image/png" href="/assets/img/favicon/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/assets/img/favicon/favicon.svg" />
-  <link rel="shortcut icon" href="/assets/img/favicon/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicon/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" href="assets/img/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon/favicon.svg" />
+  <link rel="shortcut icon" href="assets/img/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon/apple-touch-icon.png" />
   <meta name="apple-mobile-web-app-title" content="Tijhuis Tuinen" />
-  <link rel="manifest" href="/assets/img/favicon/site.webmanifest" />
+  <link rel="manifest" href="assets/img/favicon/site.webmanifest" />
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -22,14 +22,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Main CSS File -->
-  <link href="/assets/css/main.css?v=2" rel="stylesheet">
+  <link href="assets/css/main.css?v=2" rel="stylesheet">
 </head>
 
 <body class="error-page">
@@ -37,28 +37,28 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
 
-      <a href="/index.html" class="logo d-flex align-items-center me-auto me-xl-0">
-        <img src="/assets/img/logo/Text-Transparent.avif" alt="Tijhuis Tuinen" class="sitename">
-        <img src="/assets/img/logo/blokken.svg" alt="Tijhuis Tuinen Logo" class="logo-icon">
+      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+        <img src="assets/img/logo/Text-Transparent.avif" alt="Tijhuis Tuinen" class="sitename">
+        <img src="assets/img/logo/blokken.svg" alt="Tijhuis Tuinen Logo" class="logo-icon">
       </a>
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="/index.html#hero">Home</a></li>
-          <li><a href="/index.html#about">Over Ons</a></li>
-          <li class="dropdown"><a href="/index.html#services"><span>Diensten</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <li><a href="index.html#hero">Home</a></li>
+          <li><a href="index.html#about">Over Ons</a></li>
+          <li class="dropdown"><a href="index.html#services"><span>Diensten</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="/ontwerp.html" class="ontwerp-link">Ontwerp</a></li>
-              <li><a href="/aanleg.html" class="aanleg-link">Aanleg</a></li>
-              <li><a href="/onderhoud.html" class="onderhoud-link">Onderhoud</a></li>
+              <li><a href="ontwerp.html" class="ontwerp-link">Ontwerp</a></li>
+              <li><a href="aanleg.html" class="aanleg-link">Aanleg</a></li>
+              <li><a href="onderhoud.html" class="onderhoud-link">Onderhoud</a></li>
             </ul>
           </li>
-          <li><a href="/projecten.html">Ons werk</a></li>
+          <li><a href="projecten.html">Ons werk</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <a class="btn-getstarted" href="/contact.html">Contact</a>
+      <a class="btn-getstarted" href="contact.html">Contact</a>
 
     </div>
   </header>
@@ -71,9 +71,8 @@
         <div class="row justify-content-center">
           <div class="col-lg-6 text-center">
             <h2>U heeft geen toegang tot deze pagina.</h2>
-            <p>Controleer uw inloggegevens of vraag om hulp.</p>
             <p id="countdown">U wordt automatisch doorgestuurd naar de homepagina over 10 seconden.</p>
-            <a href="/contact.html" class="btn btn-primary mt-3">Neem contact op</a>
+            <a href="contact.html" class="btn btn-primary mt-3">Neem contact op</a>
           </div>
         </div>
       </div>
@@ -85,8 +84,8 @@
     <div class="container footer-top">
       <div class="row gy-4">
         <div class="col-lg-5 col-md-12 footer-about">
-          <a href="/index.html" class="logo d-flex align-items-center">
-            <img src="/assets/img/logo/Full-Logo-Transparent.avif" alt="Tijhuis Tuinen Logo" class="logo-full">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <img src="assets/img/logo/Tijhuis-Tuinen-Logo-Transparent.avif" alt="Tijhuis Tuinen Logo" class="logo-full">
           </a>
           <p>Groener Leven... Uw specialist in tuinontwerp, tuinaanleg en tuinonderhoud sinds 2005. Een familiebedrijf waar persoonlijk contact en vakmanschap voorop staan.</p>
           <div class="social-links d-flex mt-4">
@@ -99,36 +98,37 @@
         <div class="col-lg-2 col-6 footer-links">
           <h4>Nuttige Links</h4>
           <ul>
-            <li><a href="/index.html#hero">Home</a></li>
-            <li><a href="/index.html#about">Over Ons</a></li>
-            <li><a href="/index.html#services">Diensten</a></li>
-            <li><a href="/projecten.html">Ons werk</a></li>
-            <li><a href="/contact.html">Contact</a></li>
+            <li><a href="index.html#hero">Home</a></li>
+            <li><a href="index.html#about">Over Ons</a></li>
+            <li><a href="index.html#services">Diensten</a></li>
+            <li><a href="projecten.html">Ons werk</a></li>
+            <li><a href="contact.html">Contact</a></li>
           </ul>
         </div>
 
         <div class="col-lg-2 col-6 footer-links">
           <h4>Onze Diensten</h4>
           <ul>
-            <li><a href="/ontwerp.html">Tuinontwerp</a></li>
-            <li><a href="/aanleg.html">Tuinaanleg</a></li>
-            <li><a href="/onderhoud.html">Tuinonderhoud</a></li>
-            <li><a href="/index.html#services">Boomverzorging</a></li>
-            <li><a href="/index.html#services">Bestrating</a></li>
+            <li><a href="ontwerp.html">Tuinontwerp</a></li>
+            <li><a href="aanleg.html">Tuinaanleg</a></li>
+            <li><a href="onderhoud.html">Tuinonderhoud</a></li>
+            <li><a href="projecten.html#boomverzorging">Boomverzorging</a></li>
+            <li><a href="/index.html#bo-bestratingen">Bestrating</a></li>
           </ul>
         </div>
 
         <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
           <h4>Contact</h4>
           <p><strong>Email:</strong> <script type="text/javascript">document.write('<a href="mailto:info@tijhuis-tuinen.nl">info@tijhuis-tuinen.nl<\/a>');</script><noscript>Schakel JavaScript in of gebruik het contactformulier</noscript></p>
-          <p><strong>Telefoon:</strong> <a href="tel:0742670050">074 2670050</a></p>
+          <p><strong>Telefoon:</strong> <a href="tel:+31627230068">+31 6 27230068</a></p>
+          <p><strong>Contactformulier:</strong> <a href="contact.html">Contactformulier</a></p>
         </div>
 
       </div>
     </div>
 
     <div class="container copyright text-center mt-4">
-      <p>© 2005-2026 - Tijhuis Tuinen | Aan de inhoud van deze website kunnen geen rechten worden ontleend. Typ- en invoerfouten onder voorbehoud.</p>
+      <p>© 2005-2026 - Tijhuis Tuinen | Aan de inhoud van deze website kunnen geen rechten worden ontleend. Typ- en invoerfouten onder voorbehoud.<br>Website gemaakt door <a href="https://stentijhuis.nl" target="_blank" style="color: #333;">Sten Tijhuis</a></p>
     </div>
 
   </footer>
@@ -140,16 +140,16 @@
   <div id="preloader"></div>
 
   <!-- Vendor JS Files -->
-  <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="/assets/vendor/php-email-form/validate.js"></script>
-  <script src="/assets/vendor/aos/aos.js"></script>
-  <script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-  <script src="/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
   <!-- Main JS File -->
-  <script src="/assets/js/main.js"></script>
+  <script src="assets/js/main.js"></script>
 
   <!-- Auto redirect script with countdown -->
   <script>
@@ -160,7 +160,7 @@
       seconds--;
       if (seconds < 0) {
         clearInterval(interval);
-        window.location.href = '/index.html';
+        window.location.href = 'index.html';
       }
     }, 1000);
   </script>

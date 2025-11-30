@@ -1,7 +1,7 @@
 /**
   * Website: Tijhuis Tuinen
   * Codebase: https://github.com/stensel8/Tijhuis-Tuinen.nl
-  * Updated: Nov 27 2025
+  * Updated: Nov 30 2025
   * Bootstrap v5.3.8
   * Swiper v12.0.3
   * Versions: https://getbootstrap.com/docs/versions/
@@ -290,6 +290,13 @@ h6 {
   --heading-color: #ffffff;
   --nav-color: rgba(255, 255, 255, 0.5);
   --nav-hover-color: #ffffff;
+}
+
+.index-page:not(.scrolled) .header .logo {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  padding: 8px 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Index Page Header on Scroll
