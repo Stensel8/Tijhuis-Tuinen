@@ -40,7 +40,7 @@
   function toggleScrolled() {
     const selectBody = document.querySelector('body');
     const selectHeader = document.querySelector('#header');
-    if (!selectHeader.classList.contains('scroll-up-sticky') && !selectHeader.classList.contains('sticky-top') && !selectHeader.classList.contains('fixed-top')) return;
+    if (!selectHeader) return;
     window.scrollY > 100 ? selectBody.classList.add('scrolled') : selectBody.classList.remove('scrolled');
   }
 
@@ -208,6 +208,7 @@
       const button = isotopeItem.querySelector(`.isotope-filters li[data-filter=".filter-${normalized}"]`);
       if (button) {
         activateButton(button);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         return true;
       }
       return false;
@@ -229,6 +230,16 @@
 
     window.addEventListener('hashchange', applyHashFilter);
 
+    // Handle clicks on links with hashes that match current hash
+    document.querySelectorAll('a[href*="#"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const linkHash = link.getAttribute('href').split('#')[1];
+        if (linkHash && window.location.hash === `#${linkHash}`) {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+    });
+
     if (typeof imagesLoaded === 'function') {
       imagesLoaded(isotopeContainer).on('progress', requestLayout).on('always', () => queueAOSRefresh());
     }
@@ -242,14 +253,7 @@
     queueAOSRefresh();
   });
 
-  /**
-   * Frequently Asked Questions Toggle
-   */
-  document.querySelectorAll('.faq-item h3, .faq-item .faq-toggle').forEach((faqItem) => {
-    faqItem.addEventListener('click', () => {
-      faqItem.parentNode.classList.toggle('faq-active');
-    });
-  });
+
 
   /**
    * Init swiper sliders
@@ -268,17 +272,10 @@
         config.initialSlide = Math.floor(Math.random() * slideCount);
       }
 
-      let swiperInstance;
-      if (swiperElement.classList.contains("swiper-tab")) {
-        swiperInstance = initSwiperWithCustomPagination(swiperElement, config);
-      } else {
-        swiperInstance = new Swiper(swiperElement, config);
-      }
+      const swiperInstance = new Swiper(swiperElement, config);
       
       // Store instance for later use
-      if (swiperInstance) {
-        swiperInstances.push(swiperInstance);
-      }
+      swiperInstances.push(swiperInstance);
     });
   }
 
@@ -316,28 +313,102 @@
   });
 
   /**
-   * Bootstrap ScrollSpy for nav menu
+   * Custom ScrollSpy for nav menu
    */
-  let scrollSpyInstance = null;
-
-  const initScrollSpy = () => {
-    if (typeof bootstrap === 'undefined' || !bootstrap.ScrollSpy) return;
-    if (scrollSpyInstance) {
-      scrollSpyInstance.dispose();
-    }
-    scrollSpyInstance = new bootstrap.ScrollSpy(document.body, {
-      target: '#navmenu',
-      offset: getHeaderOffset() + 16
+  const navmenulinks = document.querySelectorAll('#navmenu a');
+  
+  function navmenuScrollspy() {
+    const headerOffset = getHeaderOffset();
+    navmenulinks.forEach(navmenulink => {
+      if (!navmenulink.hash) return;
+      
+      const section = document.querySelector(navmenulink.hash);
+      if (!section) return;
+      
+      const position = window.scrollY + headerOffset + 100;
+      const sectionTop = section.offsetTop;
+      const sectionBottom = sectionTop + section.offsetHeight;
+      
+      if (position >= sectionTop && position < sectionBottom) {
+        document.querySelectorAll('#navmenu a.active').forEach(link => link.classList.remove('active'));
+        navmenulink.classList.add('active');
+      } else {
+        navmenulink.classList.remove('active');
+      }
     });
-  };
-
-  window.addEventListener('load', initScrollSpy);
-  window.addEventListener('resize', debounce(initScrollSpy, 200));
-  window.addEventListener('hashchange', () => {
-    if (scrollSpyInstance) {
-      scrollSpyInstance.refresh();
+    
+    // Special handling for portfolio section - highlight "Ons werk" link
+    const portfolioSection = document.querySelector('#portfolio');
+    if (portfolioSection) {
+      const position = window.scrollY + headerOffset + 100;
+      const sectionTop = portfolioSection.offsetTop;
+      const sectionBottom = sectionTop + portfolioSection.offsetHeight;
+      
+      if (position >= sectionTop && position < sectionBottom) {
+        document.querySelectorAll('#navmenu a.active').forEach(link => link.classList.remove('active'));
+        const onsWerkLink = document.querySelector('#navmenu a[href="projecten.html"]');
+        if (onsWerkLink) {
+          onsWerkLink.classList.add('active');
+        }
+      }
     }
-  });
+  }
+  
+  window.addEventListener('load', navmenuScrollspy);
+  window.addEventListener('scroll', navmenuScrollspy);
+
+  /**
+   * Handle Services navigation for sub-pages and section scrolling
+   */
+  function handleServicesNavigation() {
+    const body = document.body;
+    const isSubPage = body.classList.contains('aanleg-page') || 
+                      body.classList.contains('ontwerp-page') || 
+                      body.classList.contains('onderhoud-page');
+    
+    const servicesDropdown = document.querySelector('#navmenu .dropdown');
+    const servicesLink = document.querySelector('#navmenu .dropdown > a[href*="#services"]');
+    
+    if (isSubPage) {
+      // Highlight Services link on sub-pages
+      if (servicesLink) {
+        document.querySelectorAll('#navmenu > ul > li > a').forEach(link => {
+          link.classList.remove('active');
+        });
+        servicesLink.classList.add('active');
+      }
+      
+      // Expand dropdown on mobile
+      if (servicesDropdown && window.innerWidth < 1200) {
+        servicesDropdown.classList.add('active');
+        const dropdownMenu = servicesDropdown.querySelector('ul');
+        if (dropdownMenu) {
+          dropdownMenu.classList.add('dropdown-active');
+        }
+      }
+    } else {
+      // Check if we're in the services section on index.html
+      const servicesSection = document.querySelector('#services');
+      if (servicesSection && servicesDropdown) {
+        const headerOffset = getHeaderOffset();
+        const position = window.scrollY + headerOffset + 100;
+        const sectionTop = servicesSection.offsetTop;
+        const sectionBottom = sectionTop + servicesSection.offsetHeight;
+        const inSection = position >= sectionTop && position < sectionBottom;
+        
+        if (inSection && window.innerWidth < 1200) {
+          servicesDropdown.classList.add('active');
+          const dropdownMenu = servicesDropdown.querySelector('ul');
+          if (dropdownMenu) {
+            dropdownMenu.classList.add('dropdown-active');
+          }
+        }
+      }
+    }
+  }
+  
+  window.addEventListener('load', handleServicesNavigation);
+  window.addEventListener('scroll', handleServicesNavigation);
 
   /**
    * Native image priority hints for portfolio
