@@ -160,11 +160,11 @@
               <img src="assets/img/contact/contact.avif" alt="Contact decoratie" class="img-fluid w-100 rounded shadow">
             </div>
             
-            <form action="https://api.web3forms.com/submit" method="POST" id="contact-form" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
-              <input type="hidden" name="access_key" value="">
-              <input type="hidden" name="subject" value="Nieuw contactformulier bericht van Tijhuis Tuinen">
-              <input type="hidden" name="from_name" value="Tijhuis Tuinen">
-              <input type="checkbox" name="botcheck" style="display: none;">
+            <form action="https://api.web3forms.com/submit" method="POST" id="contact-form" class="php-email-form" data-aos="fade-up" data-aos-delay="200" autocomplete="on">
+              <input type="hidden" name="access_key" value="" autocomplete="off">
+              <input type="hidden" name="subject" value="Nieuw contactformulier bericht van Tijhuis Tuinen" autocomplete="off">
+              <input type="hidden" name="from_name" value="Tijhuis Tuinen" autocomplete="off">
+              <input type="checkbox" name="botcheck" style="display: none;" autocomplete="off">
               <div class="row gy-4">
 
                 <div class="col-md-6">
@@ -176,15 +176,15 @@
                 </div>
 
                 <div class="col-md-6">
-                  <input type="text" class="form-control" name="phone" placeholder="Uw Telefoonnummer" required="">
+                  <input type="text" class="form-control" name="phone" placeholder="Uw Telefoonnummer" required="" autocomplete="tel">
                 </div>
 
                 <div class="col-md-6">
-                  <input type="text" class="form-control" name="onderwerp" placeholder="Onderwerp" required="">
+                  <input type="text" class="form-control" name="onderwerp" placeholder="Onderwerp" required="" autocomplete="off">
                 </div>
 
                 <div class="col-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Uw Bericht" required=""></textarea>
+                  <textarea class="form-control" name="message" rows="6" placeholder="Uw Bericht" required="" autocomplete="off"></textarea>
                 </div>
 
                 <div class="col-12 text-center">
